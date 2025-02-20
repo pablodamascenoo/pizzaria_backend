@@ -23,6 +23,17 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.delete("/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const pedido = await PedidoModel.findByIdAndDelete(id);
+        if (!pedido) return res.status(404).json({ error: "PedidoModel não encontrado" });
+        res.json(pedido);
+    } catch (error) {
+        res.status(500).json({ error: "Erro ao deletar pedido" });
+    }
+})
+
 router.put("/:id", async (req, res) => {
     try {
         const { id } = req.params;
