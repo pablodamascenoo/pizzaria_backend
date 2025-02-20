@@ -4,8 +4,8 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
     try {
-        const { clienteId, itens } = req.body;
-        const pedido = new PedidoModel({ clienteId, itens });
+        const { clienteId, primeiraMetade, segundaMetade, nome, endereco } = req.body;
+        const pedido = new PedidoModel({ clienteId, primeiraMetade, endereco, nome, segundaMetade });
         await pedido.save();
         res.status(201).json(pedido);
     } catch (error) {
